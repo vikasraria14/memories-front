@@ -7,6 +7,7 @@ const Form = () => {
     event.preventDefault();
     const title=event.target.title.value;
     const message=event.target.message.value;
+    
     const photo=postImage;
     if(!title||!message||!postImage)
     {
@@ -14,9 +15,12 @@ const Form = () => {
     }
     else
     {
+        const tags=event.target.tags.value 
         const user=window.localStorage.getItem('loggedInUser')
         const token=JSON.parse(user).token
-        const data={title,message,photo}
+        
+        const data={title,message,tags,photo}
+    
         console.log(token)
         setPosts(data,token)
 
@@ -28,6 +32,8 @@ const Form = () => {
                 <input name='title' placeholder="title" />
                 <br/><br/>
                 <input name='message' placeholder="message" />
+                <br/><br/>
+                <input name='tags' placeholder='tags' />
                 <br/><br/>
                 <FileBase type="file" multiple={false} onDone={({ base64 }) => setPostImage( base64 )} />
                 <br/><br/>

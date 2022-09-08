@@ -35,3 +35,9 @@ export const setPosts=async(data,token)=>{
     console.log("res for setPosts ",res)
     return res.data;
 }
+
+export const likePost=async(id)=>{
+    const url=url1+'posts/like/'+id;
+    const res =await axios.patch(url);
+    return res.data;
+}
