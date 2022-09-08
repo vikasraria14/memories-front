@@ -1,0 +1,30 @@
+.PostWrapper{
+  display: flex;
+  margin: 1%;
+}
+
+.card{
+  background-color: darkgray;
+  color: white;
+  margin: 1%;
+}
+body{
+  height: 100vh;
+}
+
+.App{
+  
+  
+}
+
+.loginWrapper{
+  width: 70%;
+  background-color:green;
+  height: 70%;
+  margin: 10%;
+  
+}
+
+.mainWrapper{
+  display: flex;
+}
