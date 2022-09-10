@@ -15,7 +15,7 @@ const Form = () => {
     }
     else
     {
-        const tags=event.target.tags.value 
+        const tags=event.target.tags.value //.split(',');
         const user=window.localStorage.getItem('loggedInUser')
         const token=JSON.parse(user).token
         

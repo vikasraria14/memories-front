@@ -1,14 +1,27 @@
 import Card from 'react-bootstrap/Card';
 import moment from 'moment';
-import { likePost } from '../../Controllers/login';
+import { updateLike,deleteMemory} from '../../Reducers/postReducer';
 import likeImg from '../Assets/like.png';
+import deleteImg from '../Assets/delete.png'
+import {useDispatch} from 'react-redux'
 
 const PostCard=({post})=>{
+
+  const dispatch=useDispatch();
   const like=(event)=>{
     event.preventDefault();
     const id=event.target.id;
-    likePost(id)
+    dispatch(updateLike(id))
     console.log(event.target.id)
+  }
+
+  const deletePost=(event)=>{
+    event.preventDefault();
+    const user=window.localStorage.getItem('loggedInUser')
+    const id=event.target.id;
+    const token=JSON.parse(user).token
+    console.log(token)
+    dispatch(deleteMemory(id,token))
   }
   return (
     <div className='card'>
@@ -26,6 +39,7 @@ const PostCard=({post})=>{
           {post.message}
         </Card.Text>
         <div><img id={post._id} onClick={like} src={likeImg} alt="" className='icon'/> {post.likeCount} Likes</div>
+        <div><img id={post._id} onClick={deletePost} src={deleteImg} alt="" className='icon'/> delete</div>
       </Card.Body>
     </Card>
     </div>

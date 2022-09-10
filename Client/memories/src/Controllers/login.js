@@ -36,8 +36,17 @@ export const setPosts=async(data,token)=>{
     return res.data;
 }
 
-export const likePost=async(id)=>{
-    const url=url1+'posts/like/'+id;
-    const res =await axios.patch(url);
+export const deletePost=async(id,token)=>{
+    console.log("Flow of token", token)
+    const url=url1+"posts/delete/"+id;
+    const res=await axios.delete(url,{headers:{'Authorization':`Bearer ${token}`}})
     return res.data;
 }
+
+export const likePost=async(id)=>{
+    const url=url1+"posts/like/"+id;
+    const res=await axios.patch(url);
+    console.log(res.data);
+    return res.data;
+}
+
