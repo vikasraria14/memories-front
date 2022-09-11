@@ -1,6 +1,6 @@
 const express=require('express')
 const cors=require('cors')
-//const bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 app = express();
 const postRouter=require('./controllers/posts')
 const loginRouter=require('./controllers/login')
@@ -9,8 +9,8 @@ const mongoose=require('mongoose')
 const User=require('./models/user')
 //app.use(bodyParser)
 app.use(cors())
-app.use(express.json())
-
+app.use(bodyParser.json({ limit: '30mb', extended: true }))
+app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 app.use('/posts',postRouter)
 app.use('/login',loginRouter)
 app.use('/signup',signUpRouter)
@@ -22,13 +22,7 @@ MONGODB_URI="mongodb+srv://vikas_raria:raria123@cluster0.7lq1c.mongodb.net/Memor
 mongoose.Memories=mongoose.connect(MONGODB_URI)
 .then(()=>{
     console.log("Connected to MongoDB")
-    const newUser= new User({
-        name:"Vikas","username":"Vikas",password:"Vikas"
     })
-    //newUser.save().then(()=>{console.log("UserSaved")});
-    User.find({}).populate('posts').then((res)=>console.log(res))
-    
-})
 app.get('/',(req,res)=>{
     res.end("Working")
 })
