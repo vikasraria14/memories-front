@@ -1,12 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux'
 import PostCard from "./PostCard";
-import { useNavigate } from 'react-router-dom';
-import { logOutUser } from '../../Reducers/loggedInUserReducer';
 import { useEffect } from 'react';
 import { getAllThePosts } from '../../Reducers/postReducer';
+import Row from 'react-bootstrap/Row';
 const Post = () => {
   const loggedInUser = useSelector(state => state.loggedInUser)
-  const navigate = useNavigate();
+  
   const dispatch = useDispatch();
   useEffect(() => {
     //console.log("loggedInUser",!loggedInUser ,loggedInUser)
@@ -19,29 +18,24 @@ const Post = () => {
       dispatch(getAllThePosts(token))
     }
 
-  }, [loggedInUser])
+  }, [loggedInUser,dispatch])
 
-  const logOut = (event) => {
-    event.preventDefault();
-    window.localStorage.removeItem('loggedInUser')
-    console.log("NANANANAA")
-    dispatch(logOutUser())
-    navigate('/login')
-  }
+  
 
-  const posts = useSelector(state => state.posts)
+  let posts = useSelector(state => state.posts)
   if (posts) {
+    
     return (
-      <div>
-        <button onClick={logOut}>Log Out</button>
-        <div className="PostWrapper">
+      <div className="PostWrapper">
+        
+        <Row xs={1} md={2} className="g-4">
           {
             
           posts.map(post => {
-            { console.log(post) }
+            
             return <PostCard key={post._id} post={post} />
           })}
-        </div>
+        </Row>
       </div>
     );
   }

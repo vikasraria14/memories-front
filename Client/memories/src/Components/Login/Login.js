@@ -1,21 +1,21 @@
 import {
-    BrowserRouter as Router,
-    Routes, Route, Link, useNavigate
+     useNavigate
 } from "react-router-dom"
 import './main.css'
 import image1 from './images/img-01.png'
 import './Login_v1/fonts/font-awesome-4.7.0/css/font-awesome.min.css'
 import { setLogin } from "../../Controllers/login"
-import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from "react"
+import {  useDispatch } from 'react-redux'
+import {  useState } from "react"
 import { logInUser } from "../../Reducers/loggedInUserReducer"
 const Login=()=>{
+	const [errorMessage,setErrorMessage]=useState('')
     const navigate = useNavigate()
     const redirect = () => {
         navigate('/signup')
     }
     const dispatch = useDispatch();
-    const loggedInUser = useSelector(state => state.loggedInUser)
+    
 
     const login = async (event) => {
         event.preventDefault();
@@ -23,11 +23,23 @@ const Login=()=>{
         const password = event.target.password.value;
         const data = { username, password }
         const res = await setLogin(data);
+		if(res.err)
+		{
+			
+			setErrorMessage(res.err)
+			setTimeout(()=>{
+				setErrorMessage('')
+			},5000)
+		}
+		else
+		{
+			window.localStorage.setItem('loggedInUser', JSON.stringify(res))
+			dispatch(logInUser(res))
+			console.log("U there?")
+			navigate('/')
+		}
         console.log("Clicked,", res)
-        window.localStorage.setItem('loggedInUser', JSON.stringify(res))
-        dispatch(logInUser(res))
-        console.log("U there?")
-        navigate('/')
+        
     }
     return(
         <>
@@ -57,6 +69,10 @@ const Login=()=>{
 						<span className="symbol-input100">
 							<i className="fa fa-lock" aria-hidden="true"></i>
 						</span>
+					</div>
+
+					<div className="error">
+						{errorMessage}
 					</div>
 					
 					<div className="container-login100-form-btn">

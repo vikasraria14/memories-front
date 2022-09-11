@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-import { getPosts,likePost,deletePost } from '../Controllers/login';
+import { getPosts,likePost,deletePost,setPosts} from '../Controllers/login';
 const initialState=null;
 const postSlice=createSlice({
     name:"posts",
@@ -23,7 +23,19 @@ const postSlice=createSlice({
         },
         deleteMemory1(state,action)
         {
-            return action.payload
+            const id=action.payload;
+            const x=state.filter(st=>{
+                console.log(id,st)
+                return st._id!==id}
+                );
+            return x
+        },
+        appendPost(state,action)
+        {
+            const x=action.payload;
+            state.unshift(x);
+            
+            return state;
         }
     }
 })
@@ -39,7 +51,12 @@ export const deleteMemory=(id,token)=>{
     return async dispatch=>{
         const res=await deletePost(id,token);
         console.log("Response after delete",res)
-        dispatch(deleteMemory1(res))
+        console.log(res.data)
+        if(res.data)
+        {
+            dispatch(deleteMemory1(id))
+        }
+       // 
     }
 }
 export const updateLike=(id)=>{
@@ -50,5 +67,13 @@ export const updateLike=(id)=>{
     }
 }
 
-const {getAllPosts,increaseLike,deleteMemory1}= postSlice.actions;
+export const addPost=(data,token)=>{
+    return async dispatch=>{
+        const res= await setPosts(data,token);
+        console.log("\n\n\n\n\n",res)
+        dispatch(appendPost(res));
+    }
+}
+
+const {getAllPosts,increaseLike,deleteMemory1,appendPost}= postSlice.actions;
 export default postSlice.reducer

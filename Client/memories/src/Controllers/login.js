@@ -45,6 +45,7 @@ export const deletePost=async(id,token)=>{
 
 export const likePost=async(id)=>{
     const url=url1+"posts/like/"+id;
+    console.log(url)
     const res=await axios.patch(url);
     console.log(res.data);
     return res.data;

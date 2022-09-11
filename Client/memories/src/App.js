@@ -1,13 +1,11 @@
-import Post from "./Components/Post/Post";
-import Form from "./Components/Form/Form";
-import SignInSide from "./Components/Login/SignInSide";
+
 import Login from "./Components/Login/Login";
 import {useDispatch} from 'react-redux';
-import { useState, useEffect } from "react";
+import {  useEffect } from "react";
 import { logInUser } from "./Reducers/loggedInUserReducer";
 import {
   BrowserRouter as Router,
-  Routes, Route, Link
+  Routes, Route
 } from "react-router-dom"
 import SignUp from "./Components/SignUp/SignUp";
 import Main from "./Components/Main/Main";
@@ -27,7 +25,7 @@ const App=()=>{
       dispatch(logInUser(JSON.parse(x)));
       console.log(x);
     }
-  },[])
+  },[dispatch])
   return(
     <Router >
      <div className="App">
