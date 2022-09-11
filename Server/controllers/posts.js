@@ -38,9 +38,8 @@ postRouter.get('/', async (req, res) => {
     }
 
     const theUser = await User.findById(user.id).populate('posts');
-    const allPosts = theUser.posts;
-    
-
+    let allPosts = theUser.posts;
+    allPosts=allPosts.reverse()
 
     return res.status(200).json(allPosts)
 })
@@ -114,10 +113,7 @@ postRouter.delete('/delete/:id', async (req, res) => {
     
     let theUser = await User.findById(user.id).populate('posts');
    
-    const thePosts=theUser.posts.filter(post=>{
-       
-        return post.id!==id});
-    theUser.posts=thePosts;
+   
    
     theUser.save()
     await Post.findByIdAndDelete(id);
@@ -125,7 +121,7 @@ postRouter.delete('/delete/:id', async (req, res) => {
     
 
 
-    return res.status(200).json(thePosts)
+    return res.status(200).json({data:true})
 })
 
 

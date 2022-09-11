@@ -10,16 +10,21 @@ loginRouter.get('/',async (req,res)=>{
 
 loginRouter.post('/',async (req,res)=>{
    const {username,password}=req.body;
-  console.log("Request is here")
-   if((!username)||(!password))
+  console.log("Request is here",username==="",password)
+   if((username==="")||(password===""))
    {
       
       return res.status(200).send({err:"All Fields are required"})
    }
    const user=await User.findOne({username})
-   const passwordCorrect= await bcryptjs.compare(password,user.password)
-   if(!passwordCorrect||!user)
+   if(!user)
    {
+      return res.status(200).send({err:"Username or Password is incorrect"})
+   }
+   const passwordCorrect= await bcryptjs.compare(password,user.password)
+   if(!passwordCorrect)
+   {
+      console.log("errrrr")
      
       return res.status(200).send({err:"Username or Password is incorrect"})
      // res.end("username or password incorrect")
