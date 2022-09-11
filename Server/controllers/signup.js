@@ -10,15 +10,15 @@ signUpRouter.post('/',async (req,res)=>{
     
     if(!name||!username||!password)
     {
-       return res.status(400).end("All fields are required");
+       return res.status(200).send({err:"All fields are required"});
     }
 
     const userExists=await User.findOne({username})
-    console.log(userExists)
+    
     if(userExists)
     {
         
-        return res.status(400).end("User Already Exists")
+        return res.status(200).send({err:"User Already Exists"})
     }
         const saltRounds=10;
         const passwordHash=await bcryptjs.hash(password,saltRounds)
