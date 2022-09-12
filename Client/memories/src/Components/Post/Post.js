@@ -3,22 +3,23 @@ import PostCard from "./PostCard";
 import { useEffect } from 'react';
 import { getAllThePosts } from '../../Reducers/postReducer';
 import Row from 'react-bootstrap/Row';
+import { useNavigate } from 'react-router-dom';
 const Post = () => {
   const loggedInUser = useSelector(state => state.loggedInUser)
-  
+  const navigate=useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
-    //console.log("loggedInUser",!loggedInUser ,loggedInUser)
+    
     if (!loggedInUser) {
-      console.log("navigated")
-      //navigate('/login')
+      
+      navigate('/login')
     }
     else {
       const token = (loggedInUser).token
       dispatch(getAllThePosts(token))
     }
 
-  }, [loggedInUser,dispatch])
+  }, [loggedInUser,dispatch,navigate])
 
   
 

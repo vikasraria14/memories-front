@@ -1,7 +1,6 @@
 
 import Login from "./Components/Login/Login";
 import {useDispatch} from 'react-redux';
-import {  useEffect } from "react";
 import { logInUser } from "./Reducers/loggedInUserReducer";
 import {
   BrowserRouter as Router,
@@ -17,15 +16,15 @@ const App=()=>{
   //window.localStorage.setItem('loggedInUser', JSON.stringify(res) )
   //window.localStorage.removeItem('loggedInUser')
 
-  useEffect(()=>{
+  
     const x=window.localStorage.getItem('loggedInUser')
     if(x)
     {
       
       dispatch(logInUser(JSON.parse(x)));
-      console.log(x);
+      
     }
-  },[dispatch])
+  
   return(
     <Router >
      <div className="App">

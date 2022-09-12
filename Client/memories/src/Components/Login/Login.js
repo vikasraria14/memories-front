@@ -1,9 +1,9 @@
 import {
      useNavigate
 } from "react-router-dom"
-import './main.css'
+
 import image1 from './images/img-01.png'
-import './Login_v1/fonts/font-awesome-4.7.0/css/font-awesome.min.css'
+import './font-awesome-4.7.0/css/font-awesome.min.css'
 import { setLogin } from "../../Controllers/login"
 import {  useDispatch } from 'react-redux'
 import {  useState } from "react"
@@ -14,13 +14,14 @@ const Login=()=>{
     const redirect = () => {
         navigate('/signup')
     }
+	const [username,setUsername]=useState('default')
+	const [password,setPassword]=useState('default')
     const dispatch = useDispatch();
     
 
     const login = async (event) => {
         event.preventDefault();
-        const username = event.target.username.value;
-        const password = event.target.password.value;
+        
         const data = { username, password }
         const res = await setLogin(data);
 		if(res.err)
@@ -56,7 +57,7 @@ const Login=()=>{
 					</span>
 
 					<div className="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input className="input100" type="text" name="username" placeholder="Username"/>
+						<input className="input100" type="text" value={username} name="username" placeholder="Username" onChange={(event)=>{setUsername(event.target.value)}}/>
 						<span className="focus-input100"></span>
 						<span className="symbol-input100">
 							<i className="fa fa-envelope" aria-hidden="true"></i>
@@ -64,7 +65,7 @@ const Login=()=>{
 					</div>
 
 					<div className="wrap-input100 validate-input" data-validate = "Password is required">
-						<input className="input100" type="password" name="password" placeholder="Password"/>
+						<input className="input100" type="password" value={password} name="password" placeholder="Password" onChange={(event)=>{setPassword(event.target.value)}}/>
 						<span className="focus-input100"></span>
 						<span className="symbol-input100">
 							<i className="fa fa-lock" aria-hidden="true"></i>

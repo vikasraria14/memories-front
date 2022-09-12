@@ -4,7 +4,7 @@ import {
 import { setSignUp } from '../../Controllers/login';
 import './main.css'
 import image1 from './images/img-01.png'
-import './Login_v1/fonts/font-awesome-4.7.0/css/font-awesome.min.css'
+import './font-awesome-4.7.0/css/font-awesome.min.css'
 import { useState } from "react";
 
 const SignUp = () => {
@@ -19,17 +19,17 @@ const SignUp = () => {
 		const username = event.target.username.value;
 		const password = event.target.password.value;
 		const data = { name, username, password };
-		console.log(data)
+		
 		const res = await setSignUp(data);
 		if (res.err) {
-			console.log("in if block",res.err)
+			
 			setErrorMessage(res.err)
 			setTimeout(() => {
 				setErrorMessage('')
 			}, 5000)
 		}
 		else {
-			console.log("Signup Response", res, res.err);
+			
 			navigate('/login')
 		}
 

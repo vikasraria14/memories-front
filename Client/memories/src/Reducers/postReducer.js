@@ -25,7 +25,7 @@ const postSlice=createSlice({
         {
             const id=action.payload;
             const x=state.filter(st=>{
-                console.log(id,st)
+                
                 return st._id!==id}
                 );
             return x
@@ -50,8 +50,7 @@ export const getAllThePosts=(data)=>{
 export const deleteMemory=(id,token)=>{
     return async dispatch=>{
         const res=await deletePost(id,token);
-        console.log("Response after delete",res)
-        console.log(res.data)
+       
         if(res.data)
         {
             dispatch(deleteMemory1(id))
@@ -62,7 +61,7 @@ export const deleteMemory=(id,token)=>{
 export const updateLike=(id)=>{
     return async dispatch=>{
         const res= await likePost(id);
-        console.log("\n\n\n\n\n",res)
+      
         dispatch(increaseLike(res))
     }
 }
@@ -70,7 +69,7 @@ export const updateLike=(id)=>{
 export const addPost=(data,token)=>{
     return async dispatch=>{
         const res= await setPosts(data,token);
-        console.log("\n\n\n\n\n",res)
+        
         dispatch(appendPost(res));
     }
 }

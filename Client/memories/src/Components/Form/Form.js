@@ -34,7 +34,7 @@ const Form = () => {
         setTitle('')
         setTags('')
         
-        console.log(token,data)
+        
         dispatch(addPost(data,token))
 
     }
