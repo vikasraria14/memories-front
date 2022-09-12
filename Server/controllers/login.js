@@ -10,7 +10,7 @@ loginRouter.get('/',async (req,res)=>{
 
 loginRouter.post('/',async (req,res)=>{
    const {username,password}=req.body;
-  console.log("Request is here",username==="",password)
+  
    if((username==="")||(password===""))
    {
       
@@ -24,7 +24,7 @@ loginRouter.post('/',async (req,res)=>{
    const passwordCorrect= await bcryptjs.compare(password,user.password)
    if(!passwordCorrect)
    {
-      console.log("errrrr")
+      
      
       return res.status(200).send({err:"Username or Password is incorrect"})
      // res.end("username or password incorrect")
@@ -37,7 +37,7 @@ loginRouter.post('/',async (req,res)=>{
    }
 
    const token=jwt.sign(userForToken,"Vikas");
-   console.log("Hello Token",token)
+   
 
    return res.status(200).send({user,token})
 })

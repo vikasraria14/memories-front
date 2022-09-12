@@ -65,7 +65,7 @@ postRouter.post('/', async (req, res) => {
     }
     catch (error) {
 
-        console.log("error happened in token\n\n\n\n")
+        
     }
 
 
