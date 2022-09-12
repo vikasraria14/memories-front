@@ -86,7 +86,7 @@ const Login=()=>{
 					
 
 					<div className="text-center p-t-136">
-						<Link onClick={redirect} className="txt2" >
+						<Link to={'/signup'}  className="txt2" >
 							Create your Account
 							<i className="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 						</Link>
