@@ -1,4 +1,5 @@
 import {
+	Link,
      useNavigate
 } from "react-router-dom"
 
@@ -36,10 +37,10 @@ const Login=()=>{
 		{
 			window.localStorage.setItem('loggedInUser', JSON.stringify(res))
 			dispatch(logInUser(res))
-			console.log("U there?")
+			
 			navigate('/')
 		}
-        console.log("Clicked,", res)
+        
         
     }
     return(
@@ -85,10 +86,10 @@ const Login=()=>{
 					
 
 					<div className="text-center p-t-136">
-						<a onClick={redirect} className="txt2" href="#">
+						<Link onClick={redirect} className="txt2" >
 							Create your Account
 							<i className="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-						</a>
+						</Link>
 					</div>
 				</form>
 			</div>

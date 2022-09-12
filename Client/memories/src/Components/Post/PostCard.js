@@ -10,21 +10,21 @@ const PostCard = ({ post }) => {
   const dispatch = useDispatch();
   const like = (event) => {
     event.preventDefault();
-    console.log("Clicked on like")
+    
     const id = event.target.id;
     dispatch(updateLike(id))
-    console.log(event.target.id)
+    
   }
 
   const deletePost = (event) => {
     
     event.preventDefault();
-    console.log("Clicked on delete")
+    
     const user = window.localStorage.getItem('loggedInUser')
     const id = event.target.id;
-    console.log(id)
+    
     const token = JSON.parse(user).token
-    console.log(token)
+    
     dispatch(deleteMemory(id, token))
   }
   return (

@@ -1,4 +1,5 @@
 import {
+	Link,
 	useNavigate
 } from "react-router-dom"
 import { setSignUp } from '../../Controllers/login';
@@ -85,10 +86,10 @@ const SignUp = () => {
 
 
 							<div className="text-center p-t-136">
-								<a onClick={redirect} className="txt2" href="#">
+								<Link onClick={redirect} className="txt2" >
 									Already have an account - Login
 									<i className="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-								</a>
+								</Link>
 							</div>
 						</form>
 					</div>
