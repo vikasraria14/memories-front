@@ -12,9 +12,7 @@ import { logInUser } from "../../Reducers/loggedInUserReducer"
 const Login=()=>{
 	const [errorMessage,setErrorMessage]=useState('')
     const navigate = useNavigate()
-    const redirect = () => {
-        navigate('/signup')
-    }
+    
 	const [username,setUsername]=useState('default')
 	const [password,setPassword]=useState('default')
     const dispatch = useDispatch();

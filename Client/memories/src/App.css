@@ -37,8 +37,8 @@
   
 }
 .card-text{
-  height: 80px;
-  overflow: hidden;
+  height: 100px;
+  overflow: auto;
 }
 .tags {
   color: grey;
@@ -174,3 +174,4 @@ h3{
   min-height: 10px;
   max-height: 10px;
 }
+
